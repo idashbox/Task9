@@ -13,7 +13,7 @@ public class MainLogicTask {
         }
         List<Integer> list2 = new ArrayList<Integer>();
         for (int elememt : arr[1]) {
-            list1.add(elememt);
+            list2.add(elememt);
         }
         int [][] array = new int [3][Math.max(Math.max(arr[0].length, inList1XorInList2(list1,list2).toArray().length), arr[1].length)];
         int i = 0;
@@ -38,43 +38,27 @@ public class MainLogicTask {
         for (int elememt1 : inList1NotInList2(list1, list2)){
             list.add(elememt1);
         }
-        for (int elememt2 : inList2NotInList1(list1, list2)){
+        for (int elememt2 : inList1NotInList2(list2, list1)){
             list.add(elememt2);
         }
         return list;
     }
     public static List<Integer> inList1NotInList2(List<Integer> list1, List<Integer> list2){
-        boolean flag = true;
         List<Integer> list = new ArrayList<Integer>();
-        for (int elememt1 : list1){
-            for (int elememt2 : list2){
-                if (elememt1 != elememt2){
-                    flag = true;
-                }else {
-                    flag = false;
+        int flag = 1;
+        for (int element1 : list1){
+            for (int element2 : list2){
+                if (element1 == element2){
+                    flag = 0;
                     break;
+                } else {
+                    flag = 1;
                 }
             }
-            if (flag){
-                list.add(elememt1);
-            }
-        }
-        return list;
-    }
-    public static List<Integer> inList2NotInList1(List<Integer> list1, List<Integer> list2){
-        boolean flag = true;
-        List<Integer> list = new ArrayList<Integer>();
-        for (int elememt2 : list2){
-            for (int elememt1 : list1){
-                if (elememt2 != elememt1){
-                    flag = true;
-                }else {
-                    flag = false;
-                    break;
-                }
-            }
-            if (flag){
-                list.add(elememt2);
+            if (flag == 1){
+                list.add(element1);
+            } else {
+                break;
             }
         }
         return list;
